@@ -1,0 +1,271 @@
+<!-- Declare the document type as standard HTML5 to ensure correct rendering in web browsers. -->
+<!DOCTYPE html>
+<!-- Start the HTML document and specify English as the primary language of the webpage. -->
+<html lang="en">
+<!-- Start the head section, which contains metadata, link tags, and scripts that do not appear directly on the page. -->
+<head>
+  <!-- Define the character encoding for the document as UTF-8, which supports almost all written languages. -->
+  <meta charset="UTF-8">
+  <!-- Ensure that the page scales correctly on mobile devices by setting the viewport width and initial zoom scale. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Specify the web page title that is shown on the browser tab or in search engine results. -->
+  <title>Smart Insurance Charge Predictor</title>
+  <!-- Connect to the Google Fonts API to download the 'Outfit' and 'Inter' font families for typography. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Connect to the Google Fonts static assets server to speed up font loading. -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Load the modern 'Outfit' and 'Inter' font families in normal and bold weights for text rendering. -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Link to the external CSS stylesheet that defines all the styles, gradients, and layout rules for the web app. -->
+  <link rel="stylesheet" href="/static/style.css">
+<!-- End the head section of the document. -->
+</head>
+<!-- Start the body section, which contains all the visible layout, text, forms, and results. -->
+<body>
+  <!-- Create a wrapper container that uses CSS grid or flexbox to center the main card vertically and horizontally. -->
+  <div class="app-container">
+    <!-- Create the card element that uses glassmorphism visual styling to host the title, form, and results. -->
+    <div class="glass-card">
+      <!-- Create the header section inside the card for the logo, title, and descriptive text. -->
+      <header class="app-header">
+        <!-- Add a decorative medical icon inside a styled background bubble to represent insurance/healthcare. -->
+        <div class="header-icon">🛡️</div>
+        <!-- Add the primary heading of the application with optimized font settings. -->
+        <h1>Insurance Charges Predictor</h1>
+        <!-- Add a brief subtitle explaining what the machine learning model does. -->
+        <p class="subtitle">Enter your details below to estimate your annual medical insurance charges using our trained machine learning model.</p>
+      <!-- End the header section. -->
+      </header>
+      
+      <!-- Start the interactive form for collecting user parameters, preventing standard page reloads via JS. -->
+      <form id="predictionForm" class="predictor-form">
+        <!-- Create a grid layout container to arrange form fields neatly in two columns on desktop. -->
+        <div class="form-grid">
+          <!-- Start a form group for the Age input field. -->
+          <div class="form-group">
+            <!-- Create a label for the Age input, linked to the input via the 'for' attribute. -->
+            <label for="age">Age (Years)</label>
+            <!-- Create a numeric input field for age, specifying minimum/maximum values and requiring input. -->
+            <input type="number" id="age" name="age" min="1" max="120" placeholder="e.g. 28" required>
+          <!-- End the Age form group. -->
+          </div>
+          
+          <!-- Start a form group for the BMI input field. -->
+          <div class="form-group">
+            <!-- Create a label for the BMI input, linked via 'for'. -->
+            <label for="bmi">BMI (Body Mass Index)</label>
+            <!-- Create a numeric input allowing decimal values (step="any") for precise BMI entry, requiring input. -->
+            <input type="number" id="bmi" name="bmi" min="10" max="60" step="any" placeholder="e.g. 24.5" required>
+          <!-- End the BMI form group. -->
+          </div>
+          
+          <!-- Start a form group for the Number of Children input field. -->
+          <div class="form-group">
+            <!-- Create a label for the Children input, linked via 'for'. -->
+            <label for="children">Number of Children</label>
+            <!-- Create a numeric input for children, restricting counts between 0 and 10, requiring input. -->
+            <input type="number" id="children" name="children" min="0" max="10" placeholder="e.g. 2" required>
+          <!-- End the Children form group. -->
+          </div>
+          
+          <!-- Start a form group for the Sex selection field. -->
+          <div class="form-group">
+            <!-- Create a label for the Sex select drop-down, linked via 'for'. -->
+            <label for="sex">Biological Sex</label>
+            <!-- Create a select drop-down list to choose between male and female, requiring selection. -->
+            <select id="sex" name="sex" required>
+              <!-- Create a disabled placeholder option that is selected by default. -->
+              <option value="" disabled selected>Select sex</option>
+              <!-- Create the Male select option. -->
+              <option value="male">Male</option>
+              <!-- Create the Female select option. -->
+              <option value="female">Female</option>
+            <!-- End the Sex select drop-down. -->
+            </select>
+          <!-- End the Sex form group. -->
+          </div>
+          
+          <!-- Start a form group for the Smoker selection field. -->
+          <div class="form-group">
+            <!-- Create a label for the Smoker select drop-down, linked via 'for'. -->
+            <label for="smoker">Do you smoke?</label>
+            <!-- Create a select drop-down list to choose between yes and no, requiring selection. -->
+            <select id="smoker" name="smoker" required>
+              <!-- Create a disabled placeholder option that is selected by default. -->
+              <option value="" disabled selected>Select status</option>
+              <!-- Create the Yes select option. -->
+              <option value="yes">Yes</option>
+              <!-- Create the No select option. -->
+              <option value="no">No</option>
+            <!-- End the Smoker select drop-down. -->
+            </select>
+          <!-- End the Smoker form group. -->
+          </div>
+          
+          <!-- Start a form group for the Region selection field. -->
+          <div class="form-group">
+            <!-- Create a label for the Region select drop-down, linked via 'for'. -->
+            <label for="region">Geographic Region</label>
+            <!-- Create a select drop-down list to choose one of four US regions, requiring selection. -->
+            <select id="region" name="region" required>
+              <!-- Create a disabled placeholder option that is selected by default. -->
+              <option value="" disabled selected>Select region</option>
+              <!-- Create the Northeast select option. -->
+              <option value="northeast">Northeast</option>
+              <!-- Create the Northwest select option. -->
+              <option value="northwest">Northwest</option>
+              <!-- Create the Southeast select option. -->
+              <option value="southeast">Southeast</option>
+              <!-- Create the Southwest select option. -->
+              <option value="southwest">Southwest</option>
+            <!-- End the Region select drop-down. -->
+            </select>
+          <!-- End the Region form group. -->
+          </div>
+        <!-- End the grid container layout. -->
+        </div>
+        
+        <!-- Create a container for the submit button to center it or apply special flex positioning. -->
+        <div class="form-actions">
+          <!-- Create the submit button that starts the prediction workflow, showing custom hover animations. -->
+          <button type="submit" id="submitBtn" class="submit-btn">
+            <!-- Create a span to hold the text of the button. -->
+            <span class="btn-text">Estimate Charges</span>
+            <!-- Create a loading spinner element that will be shown during the API request. -->
+            <span class="btn-spinner hidden"></span>
+          </button>
+        <!-- End the form actions container. -->
+        </div>
+      <!-- End the predictor form. -->
+      </form>
+      
+      <!-- Create the results container that is hidden by default and shown once a prediction is returned. -->
+      <div id="resultsCard" class="results-card hidden">
+        <!-- Add a title for the calculation results block. -->
+        <h3>Estimated Annual Cost</h3>
+        <!-- Create a container for displaying the primary output charge value. -->
+        <div class="charge-value-container">
+          <!-- Create the numeric element that will display the animated price (e.g. $12,345.67). -->
+          <span id="predictedCharge" class="charge-amount">$0.00</span>
+        <!-- End the charge value container. -->
+        </div>
+        <!-- Add a explanatory note to help users understand what the predicted cost represents. -->
+        <p class="results-note">This estimate is based on a Linear Regression ML model trained on historical US health insurance records.</p>
+      <!-- End the results container. -->
+      </div>
+      
+      <!-- Create an error notification banner that is hidden by default and displayed when the API fails. -->
+      <div id="errorBanner" class="error-banner hidden">
+        <!-- Create the text container that displays the specific error message. -->
+        <span id="errorMessage">An unexpected error occurred. Please check your inputs and try again.</span>
+      <!-- End the error banner. -->
+      </div>
+      
+    <!-- End the glassmorphic card container. -->
+    </div>
+  <!-- End the app container. -->
+  </div>
+
+  <!-- Start the script section containing the client-side interactive logic. -->
+  <script>
+    // Get the HTML Form element by its unique ID for event listening.
+    const form = document.getElementById('predictionForm');
+    // Get the submit button element to manage styles, text, and loaders.
+    const submitBtn = document.getElementById('submitBtn');
+    // Get the results card element to toggle its visibility class.
+    const resultsCard = document.getElementById('resultsCard');
+    // Get the numeric charge text element to display the calculated result.
+    const predictedChargeText = document.getElementById('predictedCharge');
+    // Get the error banner element to display network/input exception reports.
+    const errorBanner = document.getElementById('errorBanner');
+    // Get the error message text container to update the error text.
+    const errorMessageText = document.getElementById('errorMessage');
+
+    // Add a listener that triggers when the user submits the form.
+    form.addEventListener('submit', async function (event) {
+      // Prevent the default browser form submission which reloads the page.
+      event.preventDefault();
+      
+      // Hide any previous error banners.
+      errorBanner.classList.add('hidden');
+      // Hide the results card to allow for a fresh fade-in animation.
+      resultsCard.classList.add('hidden');
+      
+      // Disable the submit button to prevent multiple concurrent requests.
+      submitBtn.disabled = true;
+      // Find and hide the text inside the button to clear space for the loader.
+      submitBtn.querySelector('.btn-text').classList.add('hidden');
+      // Find and show the animated spinner inside the button.
+      submitBtn.querySelector('.btn-spinner').classList.remove('hidden');
+
+      // Create a key-value dictionary containing the inputs from the form elements.
+      const formData = {
+        // Read and parse the age input field value.
+        age: document.getElementById('age').value,
+        // Read and parse the BMI input field value.
+        bmi: document.getElementById('bmi').value,
+        // Read and parse the children input field value.
+        children: document.getElementById('children').value,
+        // Read the biological sex selection value.
+        sex: document.getElementById('sex').value,
+        // Read the smoker status selection value.
+        smoker: document.getElementById('smoker').value,
+        // Read the geographic region selection value.
+        region: document.getElementById('region').value
+      };
+
+      // Start a try-catch block to handle fetch request failures or errors from the API.
+      try {
+        // Perform an asynchronous HTTP POST request to the '/predict' endpoint.
+        const response = await fetch('/predict', {
+          // Specify the request method as POST.
+          method: 'POST',
+          // Add headers to notify the server that the payload is JSON formatted.
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          // Convert the payload dictionary to a string of JSON characters.
+          body: JSON.stringify(formData)
+        });
+
+        // Parse the response body as a JSON object.
+        const result = await response.json();
+
+        // Check if the server returned a success status (HTTP code 200).
+        if (response.ok && result.status === 'success') {
+          // Format the prediction number as US dollars ($XX,XXX.XX) using Intl.NumberFormat.
+          const formattedValue = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+          }).format(result.prediction);
+          
+          // Set the text content of the charge result span to the formatted dollar value.
+          predictedChargeText.innerText = formattedValue;
+          // Remove the hidden class from the results card to show the result with a fade-in animation.
+          resultsCard.classList.remove('hidden');
+        } else {
+          // If response not ok, throw an error containing the message from the server or a fallback message.
+          throw new Error(result.message || 'Failed to calculate prediction.');
+        }
+
+      // Handle any exception that was thrown in the try block.
+      } catch (error) {
+        // Set the error message container text to the details of the exception.
+        errorMessageText.innerText = error.message;
+        // Remove the hidden class from the error banner to display it to the user.
+        errorBanner.classList.remove('hidden');
+      } finally {
+        // Re-enable the submit button so the user can modify inputs and calculate again.
+        submitBtn.disabled = false;
+        // Show the text label inside the button.
+        submitBtn.querySelector('.btn-text').classList.remove('hidden');
+        // Hide the loading spinner inside the button.
+        submitBtn.querySelector('.btn-spinner').classList.add('hidden');
+      }
+    });
+  // End the script tag.
+  </script>
+<!-- End the body of the webpage. -->
+</body>
+<!-- End the HTML page. -->
+</html>

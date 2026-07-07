@@ -1,0 +1,462 @@
+/* Define custom CSS variables on the root element to establish a coherent, reuseable color palette and typography system. */
+:root {
+  /* Set the primary background gradient color 1 - a deep slate blue. */
+  --bg-gradient-start: #0f172a;
+  /* Set the primary background gradient color 2 - a dark, rich navy. */
+  --bg-gradient-end: #020617;
+  /* Set the card background color - a highly transparent white for the glassmorphism effect. */
+  --card-bg: rgba(255, 255, 255, 0.04);
+  /* Set the semi-transparent card border color to create a crisp outline. */
+  --card-border: rgba(255, 255, 255, 0.08);
+  /* Define a primary brand accent color - a vibrant, glowing cyan/blue. */
+  --accent-color: #38bdf8;
+  /* Define a secondary gradient color - a vivid violet for highlight accents. */
+  --accent-gradient: linear-gradient(135deg, #38bdf8, #818cf8);
+  /* Set the primary text color to a soft off-white. */
+  --text-primary: #f8fafc;
+  /* Set the secondary text color to a muted light-grey. */
+  --text-secondary: #94a3b8;
+  /* Set a transparent white background for inputs to give them depth. */
+  --input-bg: rgba(255, 255, 255, 0.03);
+  /* Define the input border color when normal. */
+  --input-border: rgba(255, 255, 255, 0.12);
+  /* Define the input border color when focused. */
+  --input-focus: #38bdf8;
+  /* Define a vivid red color for error states. */
+  --error-color: #ef4444;
+  /* Define a green color for success/result highlight states. */
+  --success-color: #4ade80;
+  /* Set the default font family stack prioritizing Outfit and falling back to sans-serif. */
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Set a clean header font family stack. */
+  --header-font: 'Outfit', sans-serif;
+}
+
+/* Apply box-sizing border-box to all elements and reset margins and paddings for consistent browser rendering. */
+* {
+  /* Include padding and border in the element's total width and height. */
+  box-sizing: border-box;
+  /* Reset default browser margins. */
+  margin: 0;
+  /* Reset default browser paddings. */
+  padding: 0;
+}
+
+/* Style the body to fill the entire viewport height and apply the background gradient. */
+body {
+  /* Set the font family to our custom variables. */
+  font-family: var(--font-family);
+  /* Set the default text color. */
+  color: var(--text-primary);
+  /* Establish a smooth, full-height gradient background. */
+  background: radial-gradient(circle at top right, #1e1b4b, var(--bg-gradient-start), var(--bg-gradient-end));
+  /* Set body height to match the viewport height. */
+  min-height: 100vh;
+  /* Use flexbox layout to align the content. */
+  display: flex;
+  /* Center children elements along the vertical axis. */
+  align-items: center;
+  /* Center children elements along the horizontal axis. */
+  justify-content: center;
+  /* Prevent horizontal scrollbars. */
+  overflow-x: hidden;
+  /* Set base font-smoothing for MacOS/Safari. */
+  -webkit-font-smoothing: antialiased;
+  /* Set base font-smoothing for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Style the parent container that wraps the card. */
+.app-container {
+  /* Set width to occupy most of the mobile screen. */
+  width: 90%;
+  /* Restrict the maximum width for desktop readability. */
+  max-width: 700px;
+  /* Apply top and bottom margin padding spacing. */
+  padding: 40px 0;
+}
+
+/* Implement the glassmorphic card design. */
+.glass-card {
+  /* Apply a semi-transparent background color. */
+  background: var(--card-bg);
+  /* Blur whatever is behind the card to create a frosted glass effect. */
+  backdrop-filter: blur(20px);
+  /* Webkit support for backdrop blur. */
+  -webkit-backdrop-filter: blur(20px);
+  /* Apply a thin, light border around the card. */
+  border: 1px solid var(--card-border);
+  /* Curve the card corners. */
+  border-radius: 24px;
+  /* Add an outer shadow to give the card depth. */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  /* Apply internal spacing inside the card. */
+  padding: 48px;
+}
+
+/* Style the card header block. */
+.app-header {
+  /* Center align all header text. */
+  text-align: center;
+  /* Add spacing between the header and the form. */
+  margin-bottom: 36px;
+}
+
+/* Style the decorative icon inside the header. */
+.header-icon {
+  /* Set font size to make the emoji prominent. */
+  font-size: 3rem;
+  /* Set vertical/horizontal dimensions. */
+  width: 80px;
+  /* Maintain a matching height. */
+  height: 80px;
+  /* Align it to the center. */
+  margin: 0 auto 16px auto;
+  /* Use flexbox to center the emoji content inside. */
+  display: flex;
+  /* Center along the vertical line. */
+  align-items: center;
+  /* Center along the horizontal line. */
+  justify-content: center;
+  /* Apply a soft background bubble glow. */
+  background: rgba(56, 189, 248, 0.1);
+  /* Shape it into a perfect circle. */
+  border-radius: 50%;
+  /* Apply a thin border matching the accent color. */
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Style the primary title. */
+.app-header h1 {
+  /* Set the header font family. */
+  font-family: var(--header-font);
+  /* Set weight to bold. */
+  font-weight: 700;
+  /* Set size for visual hierarchy. */
+  font-size: 2.25rem;
+  /* Apply a gradient text fill effect. */
+  background: var(--accent-gradient);
+  /* Restrict the background clipping to the text shape. */
+  -webkit-background-clip: text;
+  /* Make the text fill color transparent to show the gradient background behind it. */
+  -webkit-text-fill-color: transparent;
+  /* Add bottom margin. */
+  margin-bottom: 12px;
+  /* Optimize word spacing and character kerning. */
+  letter-spacing: -0.025em;
+}
+
+/* Style the header subtitle. */
+.subtitle {
+  /* Set the text color to a muted slate. */
+  color: var(--text-secondary);
+  /* Set line-height to make paragraphs readable. */
+  line-height: 1.6;
+  /* Set subtitle size. */
+  font-size: 0.975rem;
+  /* Restrict block width on desktop to look elegant. */
+  max-width: 500px;
+  /* Center the subtitle horizontally. */
+  margin: 0 auto;
+}
+
+/* Arrange form fields into a 2-column grid layout on larger screens. */
+.form-grid {
+  /* Enable grid. */
+  display: grid;
+  /* Define two columns of equal width. */
+  grid-template-columns: repeat(2, 1fr);
+  /* Define vertical and horizontal gap sizing. */
+  gap: 20px;
+  /* Add bottom margin spacing. */
+  margin-bottom: 32px;
+}
+
+/* Style wrapper container for label and input pairs. */
+.form-group {
+  /* Stack the label above the input vertically. */
+  display: flex;
+  /* Direction: column. */
+  flex-direction: column;
+}
+
+/* Style individual field labels. */
+.form-group label {
+  /* Use a lighter font size for label subtext. */
+  font-size: 0.875rem;
+  /* Make the label semi-bold. */
+  font-weight: 500;
+  /* Apply muted text color. */
+  color: var(--text-secondary);
+  /* Add spacing between the label and its input element. */
+  margin-bottom: 8px;
+  /* Set a slight spacing between letters. */
+  letter-spacing: 0.025em;
+  /* Transform the label to all uppercase. */
+  text-transform: uppercase;
+}
+
+/* Style inputs, selectors, and dropdown textboxes. */
+.form-group input,
+.form-group select {
+  /* Set font family matching the main font. */
+  font-family: inherit;
+  /* Set text color matching the body color. */
+  color: var(--text-primary);
+  /* Apply dark transparent background color. */
+  background-color: var(--input-bg);
+  /* Apply a semi-transparent border line. */
+  border: 1px solid var(--input-border);
+  /* Round the input corners. */
+  border-radius: 12px;
+  /* Apply comfortable padding inside the fields. */
+  padding: 14px 16px;
+  /* Set standard body font size for input values. */
+  font-size: 1rem;
+  /* Enable smooth color transitions when clicking/hovering. */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  /* Remove default browser outlines on focus. */
+  outline: none;
+}
+
+/* Customize focus styles for input controls. */
+.form-group input:focus,
+.form-group select:focus {
+  /* Swap border color with the bright accent color. */
+  border-color: var(--input-focus);
+  /* Apply a subtle glow drop shadow matching the accent color. */
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15);
+  /* Slightly brighten the input background on focus. */
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Set styling for placeholder text inside input controls. */
+.form-group input::placeholder {
+  /* Set color to a light transparent slate. */
+  color: rgba(148, 163, 184, 0.5);
+}
+
+/* Stylize option items inside drop-down lists. */
+.form-group select option {
+  /* Set solid background color so dropdown values are legible in dark mode. */
+  background-color: #0f172a;
+  /* Set text color to white. */
+  color: #fff;
+}
+
+/* Set styling for the button area container. */
+.form-actions {
+  /* Centrally align the submit button. */
+  text-align: center;
+}
+
+/* Design the primary submit button. */
+.submit-btn {
+  /* Fill the width of its parent block. */
+  width: 100%;
+  /* Set height of the button. */
+  padding: 16px;
+  /* Set font weight to bold. */
+  font-weight: 600;
+  /* Set font size. */
+  font-size: 1.05rem;
+  /* Match header font family. */
+  font-family: var(--header-font);
+  /* Set color of text inside. */
+  color: #ffffff;
+  /* Apply gradients for styling. */
+  background: var(--accent-gradient);
+  /* Remove browser default borders. */
+  border: none;
+  /* Round the button corners. */
+  border-radius: 12px;
+  /* Set cursor to pointer index. */
+  cursor: pointer;
+  /* Align items flex style to handle layout logic. */
+  display: inline-flex;
+  /* Center horizontally. */
+  justify-content: center;
+  /* Center vertically. */
+  align-items: center;
+  /* Set smooth transition speeds. */
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  /* Set shadows below the button. */
+  box-shadow: 0 10px 20px -5px rgba(56, 189, 248, 0.3);
+}
+
+/* Style button hover state. */
+.submit-btn:hover {
+  /* Slightly lift the button. */
+  transform: translateY(-2px);
+  /* Add an outer shadow to simulate height. */
+  box-shadow: 0 15px 25px -5px rgba(56, 189, 248, 0.4);
+}
+
+/* Style button click/active state. */
+.submit-btn:active {
+  /* Push it back down on click. */
+  transform: translateY(0);
+}
+
+/* Style disabled state for when prediction is loading. */
+.submit-btn:disabled {
+  /* Fade the opacity. */
+  opacity: 0.6;
+  /* Set mouse cursor back to default. */
+  cursor: not-allowed;
+  /* Stop animation movements. */
+  transform: none !important;
+}
+
+/* Style loading spinner inside button. */
+.btn-spinner {
+  /* Set width dimension. */
+  width: 20px;
+  /* Set height dimension. */
+  height: 20px;
+  /* Create circle outline. */
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  /* Highlight top edge to make it spin visually. */
+  border-top-color: #ffffff;
+  /* Round it completely. */
+  border-radius: 50%;
+  /* Run infinite rotation animation. */
+  animation: spin 0.8s linear infinite;
+}
+
+/* Create the spin keyframe animation. */
+@keyframes spin {
+  /* Start rotation at 0 degrees. */
+  to { transform: rotate(360deg); }
+}
+
+/* Layout for the results display card. */
+.results-card {
+  /* Set top margins for separation. */
+  margin-top: 36px;
+  /* Add background highlighting overlay. */
+  background: rgba(74, 222, 128, 0.05);
+  /* Add custom thin outline. */
+  border: 1px solid rgba(74, 222, 128, 0.15);
+  /* Round corners. */
+  border-radius: 16px;
+  /* Apply inner padding. */
+  padding: 28px;
+  /* Align text centrally. */
+  text-align: center;
+  /* Add a smooth entry fade-in animation. */
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Style results subhead title. */
+.results-card h3 {
+  /* Set label sizing. */
+  font-size: 0.875rem;
+  /* Capitalize labels. */
+  text-transform: uppercase;
+  /* Apply space between characters. */
+  letter-spacing: 0.05em;
+  /* Color title elements using soft grey. */
+  color: var(--text-secondary);
+  /* Add bottom padding spacing. */
+  margin-bottom: 12px;
+}
+
+/* Style the big charge text. */
+.charge-amount {
+  /* Set massive sizing for prominence. */
+  font-size: 3rem;
+  /* Set weight to bold. */
+  font-weight: 700;
+  /* Set typography family. */
+  font-family: var(--header-font);
+  /* Use green to indicate cost metric. */
+  color: var(--success-color);
+  /* Add line-height. */
+  line-height: 1.1;
+  /* Align it horizontally inside flex block. */
+  display: inline-block;
+  /* Set shadow effect. */
+  text-shadow: 0 4px 20px rgba(74, 222, 128, 0.2);
+}
+
+/* Style disclaimer note text under output. */
+.results-note {
+  /* Set size smaller. */
+  font-size: 0.775rem;
+  /* Set color to secondary. */
+  color: var(--text-secondary);
+  /* Set top margin. */
+  margin-top: 16px;
+}
+
+/* Design the error display container. */
+.error-banner {
+  /* Set top margin. */
+  margin-top: 24px;
+  /* Set standard red fill color. */
+  background: rgba(239, 68, 68, 0.07);
+  /* Set border. */
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  /* Set colors. */
+  color: #fca5a5;
+  /* Round corners. */
+  border-radius: 12px;
+  /* Set padding. */
+  padding: 16px;
+  /* Set size. */
+  font-size: 0.9rem;
+  /* Align center. */
+  text-align: center;
+  /* Run fade-in animation. */
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Helper rule to hide elements completely from layout. */
+.hidden {
+  /* Set display property to none. */
+  display: none !important;
+}
+
+/* Create the fade-in animation keyframes. */
+@keyframes fadeIn {
+  /* Initial frame: zero opacity, slightly offset down. */
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  /* Final frame: fully opaque, sitting in standard position. */
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsiveness adjustments for smaller mobile devices. */
+@media (max-width: 600px) {
+  /* Adjust form container card size. */
+  .glass-card {
+    /* Reduce inner padding size for narrow displays. */
+    padding: 24px;
+  }
+  
+  /* Convert grid columns back to 1. */
+  .form-grid {
+    /* Set column span to a single full-width column. */
+    grid-template-columns: 1fr;
+    /* Reduce gap. */
+    gap: 16px;
+  }
+
+  /* Shrink the size of headings for mobile screens. */
+  .app-header h1 {
+    /* Scale size down. */
+    font-size: 1.75rem;
+  }
+
+  /* Shrink prediction amount display. */
+  .charge-amount {
+    /* Scale size down. */
+    font-size: 2.25rem;
+  }
+}
